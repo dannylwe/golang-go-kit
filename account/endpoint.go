@@ -11,7 +11,7 @@ type Endpoints struct {
 	GetUser    endpoint.Endpoint
 }
 
-func MakeEndpoints(s service) Endpoints {
+func MakeEndpoints(s Service) Endpoints {
 	return Endpoints{
 		CreateUser: makeCreateUserEndpoint(s),
 		GetUser:    makeGetUserEndpoint(s),

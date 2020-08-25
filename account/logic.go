@@ -15,14 +15,14 @@ type service struct {
 	logger     log.Logger
 }
 
-func NewService(rep Repository, logger log.Logger) service {
-	return service{
+func NewService(rep Repository, logger log.Logger) Service {
+	return &service{
 		repository: rep,
 		logger:     logger,
 	}
 }
 
-func (s service) CreateUser(ctx context.Context, email, password string) (string, error) {
+func (s *service) CreateUser(ctx context.Context, email, password string) (string, error) {
 	logger := log.With(s.logger, "method", "CreateUser")
 	uuid, _ := uuid.NewV4()
 	id := uuid.String()
@@ -43,7 +43,7 @@ func (s service) CreateUser(ctx context.Context, email, password string) (string
 
 }
 
-func (s service) GetUser(ctx context.Context, id string) (string, error) {
+func (s *service) GetUser(ctx context.Context, id string) (string, error) {
 	logger := log.With(s.logger, "method", "GetUser")
 
 	email, err := s.repository.GetUser(ctx, id)
